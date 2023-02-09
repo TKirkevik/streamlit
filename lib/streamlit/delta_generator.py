@@ -582,25 +582,25 @@ class DeltaGenerator(
         # Convert the generator to a list, so we can use it multiple times.
         parent_block_types = list(dg._parent_block_types)
 
-        if block_type == "column":
-            num_of_parent_columns = self._count_num_of_parent_columns(
-                parent_block_types
-            )
-            if (
-                self._root_container == RootContainer.SIDEBAR
-                and num_of_parent_columns > 0
-            ):
-                raise StreamlitAPIException(
-                    "Columns cannot be placed inside other columns in the sidebar. This is only possible in the main area of the app."
-                )
-            if num_of_parent_columns > 1:
-                raise StreamlitAPIException(
-                    "Columns can only be placed inside other columns up to one level of nesting."
-                )
-        if block_type == "expandable" and block_type in frozenset(parent_block_types):
-            raise StreamlitAPIException(
-                "Expanders may not be nested inside other expanders."
-            )
+        # if block_type == "column":
+        #     num_of_parent_columns = self._count_num_of_parent_columns(
+        #         parent_block_types
+        #     )
+        #     if (
+        #         self._root_container == RootContainer.SIDEBAR
+        #         and num_of_parent_columns > 0
+        #     ):
+        #         raise StreamlitAPIException(
+        #             "Columns cannot be placed inside other columns in the sidebar. This is only possible in the main area of the app."
+        #         )
+        #     if num_of_parent_columns > 1:
+        #         raise StreamlitAPIException(
+        #             "Columns can only be placed inside other columns up to one level of nesting."
+        #         )
+        # if block_type == "expandable" and block_type in frozenset(parent_block_types):
+        #     raise StreamlitAPIException(
+        #         "Expanders may not be nested inside other expanders."
+        #     )
 
         if dg._root_container is None or dg._cursor is None:
             return dg
